@@ -6,15 +6,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.example.simplerecyclermoviedatabinding.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MovieAdapter.ListItemClickListener{
 
     private ActivityMainBinding binding;
+
+    private   List<Movie> mMovieList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,13 +33,20 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this); // you can use getContext() instead of "this"
         recyclerView.setLayoutManager(layoutManager);
 
-        List<Movie> movieList = new ArrayList<>();
-        movieList.add(new Movie("CHENNAI EXPRESS", "LOVE STORY"));
-        movieList.add(new Movie("BORDER", "PATRIOTRIC"));
-        movieList.add(new Movie("SINGHAM", "ACTION"));
-        movieList.add(new Movie("GARAM MASALA", "COMEDY"));
+        mMovieList = new ArrayList<>();
+        mMovieList.add(new Movie("CHENNAI EXPRESS", "LOVE STORY"));
+        mMovieList.add(new Movie("BORDER", "PATRIOTRIC"));
+        mMovieList.add(new Movie("SINGHAM", "ACTION"));
+        mMovieList.add(new Movie("GARAM MASALA", "COMEDY"));
         // ...
-        MovieAdapter adapter = new MovieAdapter(movieList);
+        MovieAdapter adapter = new MovieAdapter(mMovieList,this);
         recyclerView.setAdapter(adapter);
     }
+
+    @Override
+    public void onListItemClick(int position) {
+        //You will get position of the item clicked depending on your situation perform a desired action. We are simply Toasting.
+        Toast.makeText(this,position + " item clicked! ", Toast.LENGTH_LONG).show();
+    }
 }
+

@@ -3,6 +3,8 @@ package com.example.simplerecyclermoviedatabinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,8 +17,15 @@ class MovieAdapter  extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder>{
 
     private List<Movie> mMovieList;
 
-    public MovieAdapter(List<Movie> movieList) {
+    public interface ListItemClickListener{
+        void onListItemClick(int position);
+    }
+
+    ListItemClickListener itemClickListener;
+
+    public MovieAdapter(List<Movie> movieList , ListItemClickListener listItemClickListener) {
         this.mMovieList = movieList;
+        this.itemClickListener = listItemClickListener;
     }
 
     @NonNull
@@ -38,25 +47,33 @@ class MovieAdapter  extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder>{
         return mMovieList.size();
     }
 
-    public class MovieViewHolder extends RecyclerView.ViewHolder {
+    public class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         // If your layout file is something_awesome.xml then your binding class will be SomethingAwesomeBinding
         // Since our layout file is item_movie.xml, our auto generated binding class is ItemMovieBinding
-        private ItemMovieBinding binding;
+        private ItemMovieBinding itemMovieBinding;
 
         //Define a constructor taking a ItemMovieBinding as its parameter
 
+        private LinearLayout mMovieLayout;
 
         public MovieViewHolder(ItemMovieBinding itemBinding) {
             super(itemBinding.getRoot());
-            this.binding = itemBinding;
+            this.itemMovieBinding = itemBinding;
+            this.itemMovieBinding.getRoot().setOnClickListener(this);
         }
 
         /**
          * We will use this function to bind instance of Movie to the row
          */
         public void bind(Movie movie) {
-            binding.setMovie(movie);
-            binding.executePendingBindings();
+            itemMovieBinding.setMovie(movie);
+            itemMovieBinding.executePendingBindings();
+        }
+
+        @Override
+        public void onClick(View v) {
+            //Call onListItemClick which will trigger the method present in MainActivity.java
+            itemClickListener.onListItemClick(getAdapterPosition());
         }
     }
 }
