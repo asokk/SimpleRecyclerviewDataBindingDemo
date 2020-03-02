@@ -63,6 +63,8 @@ class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
         }
 
         /**
+         *
+         *
          * We will use this function to bind instance of Movie to the row
          */
         public void bind(Movie movie) {
