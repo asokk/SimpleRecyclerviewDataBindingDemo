@@ -1,29 +1,29 @@
 package com.example.simplerecyclermoviedatabinding;
 
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.LinearLayout;
-        import android.widget.TextView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
-        import androidx.annotation.NonNull;
-        import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
-        import com.example.simplerecyclermoviedatabinding.databinding.ItemMovieBinding;
+import com.example.simplerecyclermoviedatabinding.databinding.ItemMovieBinding;
 
-        import java.util.List;
+import java.util.List;
 
-class MovieAdapter  extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder>{
+class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
     private List<Movie> mMovieList;
 
-    public interface ListItemClickListener{
+    public interface ListItemClickListener {
         void onListItemClick(int position);
     }
 
     ListItemClickListener itemClickListener;
 
-    public MovieAdapter(List<Movie> movieList , ListItemClickListener listItemClickListener) {
+    public MovieAdapter(List<Movie> movieList, ListItemClickListener listItemClickListener) {
         this.mMovieList = movieList;
         this.itemClickListener = listItemClickListener;
     }

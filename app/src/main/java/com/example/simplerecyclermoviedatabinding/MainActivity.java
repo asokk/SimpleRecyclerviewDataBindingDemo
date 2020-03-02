@@ -13,18 +13,16 @@ import com.example.simplerecyclermoviedatabinding.databinding.ActivityMainBindin
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements MovieAdapter.ListItemClickListener{
+public class MainActivity extends AppCompatActivity implements MovieAdapter.ListItemClickListener {
 
     private ActivityMainBinding binding;
 
-    private   List<Movie> mMovieList;
+    private List<Movie> mMovieList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_main);
-
-         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         setupRecyclerView();
     }
 
@@ -39,14 +37,14 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.List
         mMovieList.add(new Movie("SINGHAM", "ACTION"));
         mMovieList.add(new Movie("GARAM MASALA", "COMEDY"));
         // ...
-        MovieAdapter adapter = new MovieAdapter(mMovieList,this);
+        MovieAdapter adapter = new MovieAdapter(mMovieList, this);
         recyclerView.setAdapter(adapter);
     }
 
     @Override
     public void onListItemClick(int position) {
         //You will get position of the item clicked depending on your situation perform a desired action. We are simply Toasting.
-        Toast.makeText(this,position + " item clicked! ", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, position + " item clicked! ", Toast.LENGTH_LONG).show();
     }
 }
 
