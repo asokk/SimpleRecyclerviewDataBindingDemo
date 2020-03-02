@@ -70,6 +70,7 @@ class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
         public void bind(Movie movie) {
             itemMovieBinding.setMovie(movie);
             itemMovieBinding.executePendingBindings();
+
         }
 
         @Override
