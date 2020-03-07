@@ -1,10 +1,13 @@
 package com.example.simplerecyclermoviedatabinding;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -31,12 +34,19 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.List
         LinearLayoutManager layoutManager = new LinearLayoutManager(this); // you can use getContext() instead of "this"
         recyclerView.setLayoutManager(layoutManager);
 
+        DividerItemDecoration horizontalDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        Drawable horizontalDivider = ContextCompat.getDrawable(this, R.drawable.horizontal_divider);
+        assert horizontalDivider != null;
+        horizontalDecoration.setDrawable(horizontalDivider);
+        recyclerView.addItemDecoration(horizontalDecoration);
+
         mMovieList = new ArrayList<>();
-        mMovieList.add(new Movie("CHENNAI EXPRESS", "LOVE STORY"));
-        mMovieList.add(new Movie("BORDER", "PATRIOTRIC"));
-        mMovieList.add(new Movie("SINGHAM", "ACTION"));
-        mMovieList.add(new Movie("GARAM MASALA", "COMEDY"));
-        // ...
+        mMovieList.add(new Movie(Movie.LOVE_STORY_MOVIE_TYPE, "CHENNAI EXPRESS", "LOVE STORY",0));
+        mMovieList.add(new Movie(Movie.COMMEDY_MOVIE_TYPE, "HOUSE FULL", "COMEDY", R.drawable.housefull));
+        mMovieList.add(new Movie(Movie.LOVE_STORY_MOVIE_TYPE, "DIL CHAHTA HAI", "LOVE STORY", 0));
+        mMovieList.add(new Movie(Movie.COMMEDY_MOVIE_TYPE, "GARAM MASALA", "COMEDY", R.drawable.garam_masala));
+        mMovieList.add(new Movie(Movie.COMMEDY_MOVIE_TYPE, "GOLMAAL AGAIN", "COMEDY", R.drawable.golmaal));
+
         MovieAdapter adapter = new MovieAdapter(mMovieList, this);
         recyclerView.setAdapter(adapter);
     }
